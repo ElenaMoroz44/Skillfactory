@@ -41,18 +41,16 @@ print(f'Больше всего заказов сделал пользовате
 user_sums = defaultdict(int)
 
 for order in translator.values():
-    user_sums[order["user_id"]] += order["price"] * order["quantity"]
+    user_sums[order["user_id"]] += order["price"]
 richest_user = max(user_sums.values())
 top_order_users = [user for user, count in user_sums.items() if count == richest_user]
 print(f'Самая большая суммарная стоимость заказов у пользователя: {top_order_users}, сумма: {richest_user}')
 
-order_totals = [v["price"] * v["quantity"] for v in translator.values()]
-#Под «стоимость заказа» подразумеваем цена × количество для каждого заказа
+order_totals = [v["price"] for v in translator.values()]
 avg_order_price = sum(order_totals) / len(order_totals)
 print("Средняя стоимость заказа в июле:", avg_order_price)
 
 total_price = sum(order_totals)
-#Подразумеваем «средняя цена за одну штуку товара»
 total_qty = sum(v["quantity"] for v in translator.values())
-avg_item_price = total_price / total_qty
+avg_item_price = round(total_price / total_qty, 2)
 print("Средняя стоимость товара в июле:", avg_item_price)
