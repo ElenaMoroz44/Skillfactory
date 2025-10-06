@@ -24,10 +24,10 @@ pip install requests pandas openpyxl
 
 Вызвать функции для получения данных за нужную дату:
 
-xml_bytes = fetch_cbr_rates_xml("06/10/2025")  # дата в формате DD/MM/YYYY
+date_for_rates = "06/10/2025"  # можно изменить на любую дату DD/MM/YYYY
+xml_bytes = fetch_cbr_rates_xml(date_for_rates)
 rows = parse_cbr_xml(xml_bytes)
-df = save_to_excel(rows, 'cbr_rates_06-10-2025.xlsx')
-
+df = save_to_excel(rows, f'cbr_rates_{date_for_rates.replace("/", "-")}.xlsx')
 
 Файл Excel cbr_rates_06-10-2025.xlsx будет создан в рабочей директории.
 
